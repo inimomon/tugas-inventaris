@@ -16,7 +16,9 @@ return new class extends Migration
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali');
             $table->string('status_peminjaman');
-            $table->foreignId('id_pegawai')->constrained('pegawai')->onDelete('cascade');
+            $table->unsignedBigInteger('id_pegawai');
+
+            $table->foreign('id_pegawai')->references('id_pegawai')->on('pegawai')->onDelete('cascade');
             $table->timestamps();
         });
     }

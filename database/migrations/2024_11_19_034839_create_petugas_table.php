@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('nama_petugas');
-            $table->foreignId('id_level')->constrained('level')->onDelete('cascade');
+            $table->unsignedBigInteger('id_level');
+
+            $table->foreign('id_level')->references('id_level')->on('level')->onDelete('cascade');
             $table->timestamps();
         });
     }

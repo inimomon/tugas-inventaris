@@ -18,9 +18,13 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->integer('jumlah');
             $table->date('tanggal_register');
-            $table->foreignId('id_jenis')->constrained('jenis')->onDelete('cascade');
-            $table->foreignId('id_ruang')->constrained('ruang')->onDelete('cascade');
-            $table->foreignId('id_petugas')->constrained('petugas')->onDelete('cascade');
+            $table->unsignedBigInteger('id_jenis');
+            $table->unsignedBigInteger('id_ruang');
+            $table->unsignedBigInteger('id_petugas');
+
+            $table->foreign('id_jenis')->references('id_jenis')->on('jenis')->onDelete('cascade');
+            $table->foreign('id_ruang')->references('id_ruang')->on('ruang')->onDelete('cascade');
+            $table->foreign('id_petugas')->references('id_petugas')->on('petugas')->onDelete('cascade');
             $table->string('kode_inventaris')->unique();
             $table->timestamps();
         });
