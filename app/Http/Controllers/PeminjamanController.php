@@ -64,5 +64,13 @@ class PeminjamanController extends Controller
             ->with('success', 'Peminjaman deleted successfully');
     }
 
+    public function pengembalian(string $id_peminjaman)
+    {
+        $peminjaman = Peminjaman::where('id_peminjaman', $id_peminjaman)->first();
+        $peminjaman->status_peminjaman = 'Kembali';
+        $peminjaman->save();
 
+        return redirect()->route('peminjaman.index')
+            ->with('success', 'Barang berhasil dikembalikan');
+    }
 }
