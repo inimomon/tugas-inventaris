@@ -17,16 +17,24 @@
                     <input type="text" id="name" name="nama" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4">
-                    <label for="description" class="block text-gray-700">Description</label>
-                    <textarea id="description" name="kondisi" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    <label for="quantity" class="block text-gray-700">Keterangan</label>
+                    <input type="text" id="quantity" name="keterangan" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4">
-                    <label for="quantity" class="block text-gray-700">Keterangan</label>
-                    <input type="number" id="quantity" name="keterangan" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <label for="quantity" class="block text-gray-700">Jumlah</label>
+                    <input type="number" id="quantity" name="jumlah" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="mb-4">
                     <label for="price" class="block text-gray-700">Price</label>
-                    <input type="number" id="price" name="price" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select name="id_ruang" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @foreach ($ruang as $item)
+                            <option value="{{ $item->id_ruang }}">{{ $item->nama_ruang }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label for="quantity" class="block text-gray-700">Tanggal Register</label>
+                    <input type="date" id="quantity" name="tanggal_register" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
                 <div class="text-center">
                     <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Submit</button>

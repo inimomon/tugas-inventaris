@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Peminjaman;
+use App\Models\Inventaris;
+use App\Models\User;
 
 class PeminjamanController extends Controller
 {
@@ -12,20 +14,21 @@ class PeminjamanController extends Controller
     }
 
     public function create(){
-        return view('peminjaman.create');
+        $user = User::all();
+        $inventaris = Inventaris::all();
+        return view('peminjaman.create', compact('user', 'inventaris'));
     }
 
     public function store(Request $request){
-        $validateData = $request->validate([
-            'id_pegawai' => 'required',
-            'id_inventaris' => 'required',
-            'jumlah' => 'required',
-            'tanggal_pinjam' => 'required',
-            'tanggal_kembali' => 'required',
-            'status_peminjaman' => 'required'
-        ]);
 
-        Peminjaman::create($validateData);
+        Peminjaman::create([
+            'id_pegawai' => $request->id_pegawai,
+            'id_inventaris' => $request->id_inventaris,
+            'jumlah' => $request->jumlah,
+            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'tanggal_kembali' => $request->tanggal_kembali,
+            'status_peminjaman' => 'dipinjam'
+        ]);
 
         return redirect()->route('peminjaman.index');
     }

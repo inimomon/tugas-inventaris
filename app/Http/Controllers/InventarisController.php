@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Inventaris;
+use App\Models\Ruang;
 
 class InventarisController extends Controller
 {
@@ -13,7 +14,7 @@ class InventarisController extends Controller
     public function index()
     {
         $inventaris = Inventaris::all();
-        return view('inventaris.index', compact('inventaris'));
+        return view('inventaris.home', compact('inventaris'));
     }
 
     /**
@@ -58,7 +59,7 @@ class InventarisController extends Controller
     public function edit(string $id)
     {
         $ruang = Ruang::all();
-        $inventaris = Inventaris::where('id_inventaris', $id);
+        $inventaris = Inventaris::where('id_inventaris', $id)->first(); // Fetch the first matching record
         return view('inventaris.edit', compact('inventaris', 'ruang'));
     }
 
@@ -76,7 +77,13 @@ class InventarisController extends Controller
         ]);
 
         $inventaris = Inventaris::where('id_inventaris', $id);
-        $inventaris->update($request->all());
+        $inventaris->update([
+            'nama' => $request->nama,
+            'keterangan' => $request->keterangan,
+            'jumlah' => $request->jumlah,
+            'id_ruang' => $request->id_ruang,
+            'tanggal_register' => $request->tanggal_register,
+        ]);
 
         return redirect()->route('inventaris.index')
             ->with('success', 'Inventaris updated successfully');
