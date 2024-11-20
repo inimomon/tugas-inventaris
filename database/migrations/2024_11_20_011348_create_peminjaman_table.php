@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->date('tanggal_pinjam');
             $table->date('tanggal_kembali');
-            $table->enum('status_peminjaman', ['dipinjam', 'dikembalikan']);
+            $table->enum('status_peminjaman', ['dipinjam', 'dikembalikan'])->default('dipinjam');
 
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

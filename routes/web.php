@@ -14,4 +14,8 @@ Route::get('/home', [RuangController::class, 'index'])->name('home');
 Route::post('/home', [RuangController::class, 'store'])->name('ruang.store');
 Route::put('/home/{id_ruang}', [RuangController::class, 'update'])->name('ruang.update');
 Route::delete('/home/{id_ruang}', [RuangController::class, 'destroy'])->name('ruang.destroy');
+
+
+
+Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');
 // Route::resource('inventaris', InventarisController::class);
