@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Ruang extends Model
 {
     use HasFactory;
-
     protected $table = 'ruang';
-    protected $primaryKey = 'id_ruang';
-    protected $fillable = ['nama_ruang', 'kode_ruang', 'keterangan'];
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'id',
+        'nama',
+        'kode'
+    ];
+    public $timestamps = false;
 
-    public function inventaris()
-    {
-        return $this->hasMany(Inventaris::class, 'id_ruang', 'id_ruang');
-    }
 }

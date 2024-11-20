@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Jenis;
+
 
 class AdminController extends Controller
 {
@@ -60,5 +62,32 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function createKenis(Request $request){
+        $validateData = $request->validate([
+            'nama_jenis' => 'required',
+            'kode_jenis' => 'required',
+            'keterangan' => 'required'
+        ]);
+
+        $jenis = Jenis::create($validateData);
+        return redirect()->route('jenis.index')->with('success', 'Jenis berhasil ditambahkan');
+    }
+
+    public function updateJenis(Request $request, string $id){
+        $validateData = $request->validate([
+            'nama_jenis' => 'required',
+            'kode_jenis' => 'required',
+            'keterangan' => 'required'
+        ]);
+
+        Jenis::where('id_jenis', $id)->update($validateData);
+        return redirect()->route('jenis.index')->with('success', 'Jenis berhasil diubah');
+    }
+
+    public function deleteJenis(string $id){
+        Jenis::destroy($id);
+        return redirect()->route('jenis.index')->with('success', 'Jenis berhasil dihapus');
     }
 }

@@ -2,24 +2,33 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Inventaris;
+use App\Models\User;
 
-class Peminjaman extends Model
+class peminjaman extends Model
 {
-    use HasFactory;
-
     protected $table = 'peminjaman';
-    protected $primaryKey = 'id_peminjaman';
-    protected $fillable = ['tanggal_pinjam', 'tanggal_kembali', 'status_peminjaman', 'id_pegawai'];
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'id',
+        'id_pegawai',
+        'id_inventaris',
+        'jumlah',
+        'tanggal_pinjam',
+        'tanggal_kembali',
+        'status_peminjaman'
+    ];
+    public $timestamps = false;
 
-    public function pegawai()
+    function inventaris()
     {
-        return $this->belongsTo(Pegawai::class, 'id_pegawai', 'id_pegawai');
+        return $this->belongsTo(Inventaris::class, 'id_inventaris', 'id');
     }
 
-    public function detailPinjam()
+    function pegawai()
     {
-        return $this->hasMany(DetailPinjam::class, 'id_peminjaman', 'id_peminjaman');
+        return $this->belongsTo(User::class, 'id_pegawai', 'id');
     }
+
 }
