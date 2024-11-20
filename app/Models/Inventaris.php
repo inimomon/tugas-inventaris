@@ -24,5 +24,8 @@ class Inventaris extends Model
         return $this->belongsTo(Ruang::class, 'id_ruang', 'id');
     }
 
-    
+    public function peminjaman()
+    {
+        return $this->hasMany(Peminjaman::class, 'id_inventaris', 'id_inventaris');
+    }
 }

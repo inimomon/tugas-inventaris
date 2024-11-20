@@ -16,9 +16,4 @@ class Ruang extends Model
         'keterangan'
     ];
     public $timestamps = false;
-
-    function inventaris()
-    {
-        return $this->hasMany(Inventaris::class, 'id_ruang', 'id');
-    }
 }

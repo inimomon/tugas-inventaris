@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Inventaris;
 use App\Models\Ruang;
+use Illuminate\Support\Facades\DB;
 
 class InventarisController extends Controller
 {
@@ -13,7 +14,10 @@ class InventarisController extends Controller
      */
     public function index()
     {
-        $inventaris = Inventaris::all();
+        $inventaris = DB::table('inventaris')
+            ->join('ruang', 'inventaris.id_ruang', '=', 'ruang.id_ruang')
+            ->select('inventaris.*', 'ruang.nama_ruang')
+            ->get();
         return view('inventaris.home', compact('inventaris'));
     }
 

@@ -9,10 +9,9 @@ use App\Models\User;
 class peminjaman extends Model
 {
     protected $table = 'peminjaman';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'id_peminjaman';
     protected $fillable = [
-        'id',
-        'id_pegawai',
+        'id_user',
         'id_inventaris',
         'jumlah',
         'tanggal_pinjam',
@@ -21,14 +20,14 @@ class peminjaman extends Model
     ];
     public $timestamps = false;
 
-    function inventaris()
+    function user()
     {
-        return $this->belongsTo(Inventaris::class, 'id_inventaris', 'id');
+        return $this->belongsTo(User::class, 'id_user', 'id');
     }
 
-    function pegawai()
+    function inventaris()
     {
-        return $this->belongsTo(User::class, 'id_pegawai', 'id');
+        return $this->belongsTo(User::class, 'id_inventaris', 'id_inventaris');
     }
 
 }
