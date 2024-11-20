@@ -12,8 +12,8 @@ class Ruang extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
-        'nama',
-        'kode'
+        'nama_ruang',
+        'keterangan'
     ];
     public $timestamps = false;
 

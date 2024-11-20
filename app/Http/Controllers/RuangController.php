@@ -13,7 +13,7 @@ class RuangController extends Controller
     public function index()
     {
         $ruang = Ruang::all();
-        return view('ruang.index', compact('ruang'));
+        return view('home', compact('ruang'));
     }
 
     /**
@@ -36,7 +36,7 @@ class RuangController extends Controller
 
         Ruang::create($request->all());
 
-        return redirect()->route('ruang.create')
+        return redirect()->route('home')
             ->with('success', 'Ruang created successfully.');
     }
 
@@ -60,18 +60,23 @@ class RuangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id_ruang)
     {
         $request->validate([
             'nama_ruang' => 'required',
             'keterangan' => 'required',
         ]);
-
-        Ruang::where('id_ruang', $id)->update($request->all());
-
-        return redirect()->route('ruang.index')
+    
+        // Update only the specified fields
+        Ruang::where('id_ruang', $id_ruang)->update([
+            'nama_ruang' => $request->input('nama_ruang'),
+            'keterangan' => $request->input('keterangan'),
+        ]);
+    
+        return redirect()->route('home')
             ->with('success', 'Ruang updated successfully');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -80,7 +85,7 @@ class RuangController extends Controller
     {
         Ruang::where('id_ruang', $id)->delete();
 
-        return redirect()->route('ruang.index')
+        return redirect()->route('home')
             ->with('success', 'Ruang deleted successfully');
     }
 }
